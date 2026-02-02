@@ -42,7 +42,13 @@ setwd(metadata.dir)
 metadata <- read_excel("MASTER_Lander&Sub_Logsheet.xlsx",sheet=cruise)%>%
   rename(
     OpCode = opcode
+  )%>%
+  mutate(
+    depth_m = parse_number(depth_m)
   )
+
+str(metadata$depth_m)
+unique(head(metadata$depth_m, 20))
 
 # Link deployment depth to EM data 
 depcounts_env<- depcounts %>%
